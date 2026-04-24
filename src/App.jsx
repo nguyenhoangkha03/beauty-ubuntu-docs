@@ -25,6 +25,11 @@ import LessonSnapFlatpak from "./pages/Phan-3.2.jsx";
 import LessonDebInstall from "./pages/Phan-3.3.jsx";
 import LessonBuildSource from "./pages/Phan-3.4.jsx";
 import LessonPpaManagement from "./pages/Phan-3.5.jsx";
+import LessonUsersGroups from "./pages/Phan-4.1.jsx";
+import LessonPermissions from "./pages/Phan-4.2.jsx";
+import LessonSudoRoot from "./pages/Phan-4.3.jsx";
+import LessonPasswordManagement from "./pages/Phan-4.4.jsx";
+import LessonLoginSessions from "./pages/Phan-4.5.jsx";
 
 const lessons = [
     {
@@ -230,6 +235,66 @@ const lessons = [
             "Dùng ppa-purge để gỡ PPA và hạ cấp gói đúng cách",
         ],
         Component: LessonPpaManagement,
+    },
+    {
+        path: "/phan-4-1",
+        code: "4.1",
+        title: "Quản lý User và Group",
+        description:
+            "Làm quen mô hình đa người dùng của Linux, các file hệ thống liên quan và cách tạo, sửa, xóa tài khoản an toàn.",
+        bullets: [
+            "Hiểu root, system user, regular user và các file /etc liên quan",
+            "Dùng useradd, usermod, userdel, groupadd và tránh bẫy -G",
+        ],
+        Component: LessonUsersGroups,
+    },
+    {
+        path: "/phan-4-2",
+        code: "4.2",
+        title: "Hệ thống phân quyền Linux",
+        description:
+            "Nắm cách Linux kiểm soát quyền truy cập file/thư mục qua rwx, chmod, chown và các giá trị octal.",
+        bullets: [
+            "Đọc hiểu chuỗi permission trong ls -l",
+            "Thực hành chmod, chown và phân biệt quyền trên file với thư mục",
+        ],
+        Component: LessonPermissions,
+    },
+    {
+        path: "/phan-4-3",
+        code: "4.3",
+        title: "Lệnh sudo và tài khoản root",
+        description:
+            "Hiểu quyền tối cao của root, cách sudo hoạt động, cấu hình sudoers và các tình huống cấp quyền an toàn.",
+        bullets: [
+            "Phân biệt root trực tiếp, sudo, sudo -i và sudo -s",
+            "Đọc sudoers, dùng visudo và quản lý quyền sudo theo user hoặc group",
+        ],
+        Component: LessonSudoRoot,
+    },
+    {
+        path: "/phan-4-4",
+        code: "4.4",
+        title: "Quản lý mật khẩu trong Linux",
+        description:
+            "Học cách đổi mật khẩu, kiểm soát tuổi thọ mật khẩu và hiểu policy xác thực của hệ thống Linux.",
+        bullets: [
+            "Dùng passwd, chage và đọc thông tin tài khoản liên quan đến mật khẩu",
+            "Hiểu expiry, password aging và vai trò của PAM policy",
+        ],
+        Component: LessonPasswordManagement,
+    },
+    {
+        path: "/phan-4-5",
+        code: "4.5",
+        title: "Xem và quản lý phiên đăng nhập",
+        description:
+            "Theo dõi user đang online, lịch sử đăng nhập và cách kiểm soát các session đang hoạt động trên hệ thống.",
+        bullets: [
+            "Dùng who, w, last và loginctl để kiểm tra session",
+            "Biết cách logout, khóa hoặc kết thúc phiên của user khi cần",
+        ],
+        Component: LessonLoginSessions,
     },
 ];
 
