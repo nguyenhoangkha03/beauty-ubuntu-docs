@@ -1,5 +1,15 @@
-import { useEffect } from "react";
-import { ArrowLeft, ArrowRight, BookOpen, Compass, Home } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import {
+    ArrowLeft,
+    ArrowRight,
+    BookCheck,
+    BookMarked,
+    BookOpen,
+    CheckCircle2,
+    Circle,
+    Compass,
+    Home,
+} from "lucide-react";
 import {
     HashRouter,
     Link,
@@ -298,6 +308,37 @@ const lessons = [
     },
 ];
 
+const LESSON_STATUS_KEY = "ubuntu-course-lesson-status";
+
+function readLessonStatuses() {
+    if (typeof window === "undefined") return {};
+
+    try {
+        const raw = window.localStorage.getItem(LESSON_STATUS_KEY);
+        return raw ? JSON.parse(raw) : {};
+    } catch {
+        return {};
+    }
+}
+
+function lessonStatusLabel(status) {
+    if (status === "saved") return "Đang đánh dấu";
+    if (status === "done") return "Đã hoàn thành";
+    return "Chưa đánh dấu";
+}
+
+function lessonStatusClasses(status) {
+    if (status === "saved") {
+        return "border-amber-500/30 bg-amber-500/10 text-amber-300";
+    }
+
+    if (status === "done") {
+        return "border-emerald-500/30 bg-emerald-500/10 text-emerald-300";
+    }
+
+    return "border-slate-700 bg-slate-900 text-slate-400";
+}
+
 function ScrollToTop() {
     const location = useLocation();
 
@@ -308,7 +349,18 @@ function ScrollToTop() {
     return null;
 }
 
-function HomePage() {
+function HomePage({ lessonStatuses, onToggleSaved, onToggleDone }) {
+    const stats = useMemo(() => {
+        const values = Object.values(lessonStatuses);
+        const saved = values.filter((status) => status === "saved").length;
+        const done = values.filter((status) => status === "done").length;
+        const percent = lessons.length
+            ? Math.round((done / lessons.length) * 100)
+            : 0;
+
+        return { saved, done, percent };
+    }, [lessonStatuses]);
+
     return (
         <div className="min-h-screen bg-slate-950 text-slate-100">
             <header className="border-b border-slate-800 bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.16),_transparent_42%),linear-gradient(180deg,_rgba(15,23,42,0.98),_rgba(2,6,23,1))]">
@@ -346,6 +398,40 @@ function HomePage() {
                                     tục học.
                                 </p>
                             </div>
+                            <div className="mt-6 space-y-4 rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
+                                <div className="flex items-center justify-between gap-3 text-sm">
+                                    <div>
+                                        <div className="font-semibold text-white">
+                                            Tiến độ khóa học
+                                        </div>
+                                        <div className="text-slate-400">
+                                            {stats.done}/{lessons.length} bài đã
+                                            hoàn thành
+                                        </div>
+                                    </div>
+                                    <div className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-300">
+                                        {stats.percent}%
+                                    </div>
+                                </div>
+                                <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+                                    <div
+                                        className="h-full rounded-full bg-gradient-to-r from-orange-400 via-amber-300 to-emerald-400 transition-all duration-500"
+                                        style={{ width: `${stats.percent}%` }}
+                                    />
+                                </div>
+                                <div className="grid grid-cols-2 gap-3 text-sm">
+                                    <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-amber-200">
+                                        <div className="font-semibold">
+                                            {stats.saved} bài đang đánh dấu
+                                        </div>
+                                    </div>
+                                    <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-emerald-200">
+                                        <div className="font-semibold">
+                                            {stats.done} bài đã xong
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -369,38 +455,94 @@ function HomePage() {
 
                     <div className="grid gap-4">
                         {lessons.map((lesson) => (
-                            <Link
+                            <div
                                 key={lesson.path}
-                                to={lesson.path}
                                 className="group rounded-3xl border border-slate-800 bg-slate-950/90 p-5 transition hover:border-orange-500/40 hover:bg-slate-950"
                             >
                                 <div className="flex items-start justify-between gap-4">
-                                    <div>
-                                        <div className="text-sm font-semibold text-orange-300">
-                                            Phần {lesson.code}
+                                    <Link to={lesson.path} className="min-w-0 flex-1">
+                                        <div className="flex flex-wrap items-center gap-2">
+                                            <div className="text-sm font-semibold text-orange-300">
+                                                Phần {lesson.code}
+                                            </div>
+                                            <span
+                                                className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${lessonStatusClasses(lessonStatuses[lesson.path])}`}
+                                            >
+                                                {lessonStatuses[lesson.path] ===
+                                                "done" ? (
+                                                    <CheckCircle2 size={14} />
+                                                ) : lessonStatuses[
+                                                      lesson.path
+                                                  ] === "saved" ? (
+                                                    <BookMarked size={14} />
+                                                ) : (
+                                                    <Circle size={14} />
+                                                )}
+                                                {lessonStatusLabel(
+                                                    lessonStatuses[lesson.path],
+                                                )}
+                                            </span>
                                         </div>
-                                        <h3 className="mt-1 text-xl font-bold text-white">
+                                        <h3 className="mt-2 text-xl font-bold text-white">
                                             {lesson.title}
                                         </h3>
-                                    </div>
+                                    </Link>
                                     <ArrowRight className="mt-1 shrink-0 text-slate-500 transition group-hover:text-orange-300" />
                                 </div>
 
-                                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
-                                    {lesson.description}
-                                </p>
+                                <Link to={lesson.path}>
+                                    <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
+                                        {lesson.description}
+                                    </p>
+                                </Link>
 
                                 <div className="mt-4 grid gap-2 text-sm text-slate-300 md:grid-cols-2">
                                     {lesson.bullets.map((bullet) => (
-                                        <div
+                                        <Link
                                             key={bullet}
+                                            to={lesson.path}
                                             className="rounded-2xl border border-slate-800 bg-slate-900/70 px-4 py-3"
                                         >
                                             {bullet}
-                                        </div>
+                                        </Link>
                                     ))}
                                 </div>
-                            </Link>
+
+                                <div className="mt-5 flex flex-wrap gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            onToggleSaved(lesson.path)
+                                        }
+                                        className={`inline-flex items-center gap-2 rounded-2xl border px-4 py-2 text-sm font-semibold transition ${
+                                            lessonStatuses[lesson.path] ===
+                                            "saved"
+                                                ? "border-amber-500/40 bg-amber-500/10 text-amber-200"
+                                                : "border-slate-700 bg-slate-900 text-slate-300 hover:border-amber-500/30 hover:text-amber-200"
+                                        }`}
+                                    >
+                                        <BookMarked size={16} />
+                                        {lessonStatuses[lesson.path] === "saved"
+                                            ? "Bỏ đánh dấu"
+                                            : "Đánh dấu đang học"}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => onToggleDone(lesson.path)}
+                                        className={`inline-flex items-center gap-2 rounded-2xl border px-4 py-2 text-sm font-semibold transition ${
+                                            lessonStatuses[lesson.path] ===
+                                            "done"
+                                                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-200"
+                                                : "border-slate-700 bg-slate-900 text-slate-300 hover:border-emerald-500/30 hover:text-emerald-200"
+                                        }`}
+                                    >
+                                        <BookCheck size={16} />
+                                        {lessonStatuses[lesson.path] === "done"
+                                            ? "Bỏ hoàn thành"
+                                            : "Đánh dấu đã học xong"}
+                                    </button>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </section>
@@ -409,16 +551,22 @@ function HomePage() {
     );
 }
 
-function LessonPage({ lessonIndex }) {
+function LessonPage({
+    lessonIndex,
+    lessonStatuses,
+    onToggleSaved,
+    onToggleDone,
+}) {
     const lesson = lessons[lessonIndex];
     const previousLesson = lessons[lessonIndex - 1];
     const nextLesson = lessons[lessonIndex + 1];
     const Component = lesson.Component;
+    const status = lessonStatuses[lesson.path];
 
     return (
         <div className="bg-slate-950">
-            <div className="fixed bottom-4 left-1/2 z-[60] w-[calc(100%-1.5rem)] max-w-xl -translate-x-1/2">
-                <div className="flex items-center justify-between gap-2 rounded-2xl border border-slate-700 bg-slate-950/95 p-2 shadow-2xl shadow-black/35 backdrop-blur">
+            <div className="fixed bottom-4 left-1/2 z-[60] w-[calc(100%-1.5rem)] max-w-4xl -translate-x-1/2">
+                <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-slate-700 bg-slate-950/95 p-2 shadow-2xl shadow-black/35 backdrop-blur">
                     <Link
                         to="/"
                         className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-slate-200 transition hover:bg-slate-800 hover:text-white"
@@ -440,6 +588,47 @@ function LessonPage({ lessonIndex }) {
                             Bài đầu
                         </span>
                     )}
+
+                    <div className="flex flex-1 flex-wrap items-center justify-center gap-2">
+                        <div
+                            className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold ${lessonStatusClasses(status)}`}
+                        >
+                            {status === "done" ? (
+                                <CheckCircle2 size={16} />
+                            ) : status === "saved" ? (
+                                <BookMarked size={16} />
+                            ) : (
+                                <Circle size={16} />
+                            )}
+                            {lessonStatusLabel(status)}
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => onToggleSaved(lesson.path)}
+                            className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition ${
+                                status === "saved"
+                                    ? "border-amber-500/40 bg-amber-500/10 text-amber-200"
+                                    : "border-slate-700 bg-slate-900 text-slate-300 hover:border-amber-500/30 hover:text-amber-200"
+                            }`}
+                        >
+                            <BookMarked size={16} />
+                            {status === "saved"
+                                ? "Bỏ đánh dấu"
+                                : "Đánh dấu"}
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => onToggleDone(lesson.path)}
+                            className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition ${
+                                status === "done"
+                                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-200"
+                                    : "border-slate-700 bg-slate-900 text-slate-300 hover:border-emerald-500/30 hover:text-emerald-200"
+                            }`}
+                        >
+                            <BookCheck size={16} />
+                            {status === "done" ? "Bỏ hoàn thành" : "Hoàn thành"}
+                        </button>
+                    </div>
 
                     {nextLesson ? (
                         <Link
@@ -463,16 +652,57 @@ function LessonPage({ lessonIndex }) {
 }
 
 function AppRoutes() {
+    const [lessonStatuses, setLessonStatuses] = useState(() =>
+        readLessonStatuses(),
+    );
+
+    useEffect(() => {
+        window.localStorage.setItem(
+            LESSON_STATUS_KEY,
+            JSON.stringify(lessonStatuses),
+        );
+    }, [lessonStatuses]);
+
+    const handleToggleSaved = (path) => {
+        setLessonStatuses((current) => ({
+            ...current,
+            [path]: current[path] === "saved" ? "none" : "saved",
+        }));
+    };
+
+    const handleToggleDone = (path) => {
+        setLessonStatuses((current) => ({
+            ...current,
+            [path]: current[path] === "done" ? "none" : "done",
+        }));
+    };
+
     return (
         <>
             <ScrollToTop />
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route
+                    path="/"
+                    element={
+                        <HomePage
+                            lessonStatuses={lessonStatuses}
+                            onToggleSaved={handleToggleSaved}
+                            onToggleDone={handleToggleDone}
+                        />
+                    }
+                />
                 {lessons.map((lesson, index) => (
                     <Route
                         key={lesson.path}
                         path={lesson.path}
-                        element={<LessonPage lessonIndex={index} />}
+                        element={
+                            <LessonPage
+                                lessonIndex={index}
+                                lessonStatuses={lessonStatuses}
+                                onToggleSaved={handleToggleSaved}
+                                onToggleDone={handleToggleDone}
+                            />
+                        }
                     />
                 ))}
                 <Route path="*" element={<Navigate to="/" replace />} />
