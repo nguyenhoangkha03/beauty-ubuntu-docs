@@ -40,6 +40,12 @@ import LessonPermissions from "./pages/Phan-4.2.jsx";
 import LessonSudoRoot from "./pages/Phan-4.3.jsx";
 import LessonPasswordManagement from "./pages/Phan-4.4.jsx";
 import LessonLoginSessions from "./pages/Phan-4.5.jsx";
+import LessonProcessOverview from "./pages/Phan-5.1.jsx";
+import LessonProcessControl from "./pages/Phan-5.2.jsx";
+import LessonBackgroundJobs from "./pages/Phan-5.3.jsx";
+import LessonResourceMonitoring from "./pages/Phan-5.4.jsx";
+import LessonSystemdServices from "./pages/Phan-5.5.jsx";
+import LessonSystemLogs from "./pages/Phan-5.6.jsx";
 
 const lessons = [
     {
@@ -305,6 +311,78 @@ const lessons = [
             "Biết cách logout, khóa hoặc kết thúc phiên của user khi cần",
         ],
         Component: LessonLoginSessions,
+    },
+    {
+        path: "/phan-5-1",
+        code: "5.1",
+        title: "Xem tiến trình đang chạy",
+        description:
+            "Hiểu process là gì và dùng ps, top, htop, pgrep, pstree để quan sát hệ thống đang chạy ra sao.",
+        bullets: [
+            "Đọc PID, PPID, state và cây tiến trình",
+            "Biết cách soi process ngốn CPU hoặc RAM",
+        ],
+        Component: LessonProcessOverview,
+    },
+    {
+        path: "/phan-5-2",
+        code: "5.2",
+        title: "Quản lý tiến trình",
+        description:
+            "Làm chủ signal, kill, pkill, killall, nice, renice và quản lý job để can thiệp process an toàn.",
+        bullets: [
+            "Ưu tiên SIGTERM trước khi dùng SIGKILL",
+            "Điều chỉnh priority và xử lý foreground/background job",
+        ],
+        Component: LessonProcessControl,
+    },
+    {
+        path: "/phan-5-3",
+        code: "5.3",
+        title: "Tiến trình nền và phiên làm việc bền vững",
+        description:
+            "Giữ job sống khi mất SSH bằng nohup, disown, screen và tmux, đồng thời tổ chức workspace terminal chuyên nghiệp hơn.",
+        bullets: [
+            "Phân biệt background job với session bền vững",
+            "Dùng tmux hoặc screen để reconnect an toàn",
+        ],
+        Component: LessonBackgroundJobs,
+    },
+    {
+        path: "/phan-5-4",
+        code: "5.4",
+        title: "Kiểm tra tài nguyên hệ thống",
+        description:
+            "Theo dõi CPU, RAM, disk và các điểm nghẽn bằng free, df, du, vmstat, iostat, sar và công cụ trực quan.",
+        bullets: [
+            "Đọc nhanh CPU, memory, disk space và disk usage",
+            "Biết cách truy nguyên bottleneck tài nguyên",
+        ],
+        Component: LessonResourceMonitoring,
+    },
+    {
+        path: "/phan-5-5",
+        code: "5.5",
+        title: "Quản lý dịch vụ với systemd",
+        description:
+            "Học cách điều khiển service, xem trạng thái, đọc log và viết custom unit file bằng systemctl và journalctl.",
+        bullets: [
+            "start, stop, restart, reload, enable, mask",
+            "Đọc unit file và quản lý service khi boot",
+        ],
+        Component: LessonSystemdServices,
+    },
+    {
+        path: "/phan-5-6",
+        code: "5.6",
+        title: "Xem log hệ thống",
+        description:
+            "Phân tích log Ubuntu với /var/log, auth.log, journalctl, dmesg, logrotate và các workflow xử lý sự cố thực tế.",
+        bullets: [
+            "Đọc, lọc và truy vết log phục vụ troubleshooting",
+            "Hiểu journald, kernel log và xoay vòng log",
+        ],
+        Component: LessonSystemLogs,
     },
 ];
 
