@@ -46,6 +46,16 @@ import LessonBackgroundJobs from "./pages/Phan-5.3.jsx";
 import LessonResourceMonitoring from "./pages/Phan-5.4.jsx";
 import LessonSystemdServices from "./pages/Phan-5.5.jsx";
 import LessonSystemLogs from "./pages/Phan-5.6.jsx";
+import LessonNetworkConfig from "./pages/Phan-6.1.jsx";
+import LessonNetworkDiagnostics from "./pages/Phan-6.2.jsx";
+import LessonDownloadTools from "./pages/Phan-6.3.jsx";
+import LessonSshRemoteAccess from "./pages/Phan-6.4.jsx";
+import LessonUfwFirewall from "./pages/Phan-6.5.jsx";
+import LessonFileSharing from "./pages/Phan-6.6.jsx";
+import LessonNanoEditor from "./pages/Phan-7.1.jsx";
+import LessonVimEditor from "./pages/Phan-7.2.jsx";
+import LessonTextProcessing from "./pages/Phan-7.3.jsx";
+import LessonDiffPatch from "./pages/Phan-7.4.jsx";
 
 const lessons = [
     {
@@ -383,6 +393,126 @@ const lessons = [
             "Hiểu journald, kernel log và xoay vòng log",
         ],
         Component: LessonSystemLogs,
+    },
+    {
+        path: "/phan-6-1",
+        code: "6.1",
+        title: "Kiểm tra cấu hình mạng",
+        description:
+            "Nắm các lệnh nền tảng để xem interface, IP, route, DNS, hostname và trạng thái kết nối của máy Ubuntu.",
+        bullets: [
+            "Dùng ip, hostname, nmcli và các lệnh mạng cơ bản",
+            "Hiểu interface, địa chỉ IP, default gateway và DNS",
+        ],
+        Component: LessonNetworkConfig,
+    },
+    {
+        path: "/phan-6-2",
+        code: "6.2",
+        title: "Kiểm tra kết nối mạng",
+        description:
+            "Thực hành debug mạng với ping, traceroute, ss, netstat, nmap và các bước xác định lỗi kết nối.",
+        bullets: [
+            "Kiểm tra reachability, route và port đang lắng nghe",
+            "Làm quen workflow chẩn đoán sự cố mạng thực tế",
+        ],
+        Component: LessonNetworkDiagnostics,
+    },
+    {
+        path: "/phan-6-3",
+        code: "6.3",
+        title: "Tải file từ internet: wget, curl",
+        description:
+            "Học cách tải file, gọi HTTP API, làm việc với header, cookie và kiểm tra dữ liệu tải về bằng wget và curl.",
+        bullets: [
+            "Phân biệt wget để tải file và curl để thao tác HTTP/API",
+            "Dùng header, cookie, redirect và checksum đúng ngữ cảnh",
+        ],
+        Component: LessonDownloadTools,
+    },
+    {
+        path: "/phan-6-4",
+        code: "6.4",
+        title: "SSH kết nối từ xa an toàn",
+        description:
+            "Làm việc với SSH, key pair, SCP, tunnel và các thực hành bảo mật khi truy cập máy từ xa.",
+        bullets: [
+            "Kết nối SSH bằng password hoặc SSH key",
+            "Hiểu SCP, port forwarding và hardening cơ bản",
+        ],
+        Component: LessonSshRemoteAccess,
+    },
+    {
+        path: "/phan-6-5",
+        code: "6.5",
+        title: "Cấu hình tường lửa với UFW",
+        description:
+            "Thiết lập firewall Ubuntu an toàn với UFW, từ default policy đến allow, deny, logging và xử lý lỗi SSH.",
+        bullets: [
+            "Bật UFW an toàn và mở đúng port cần thiết",
+            "Quản lý rule, app profile, log và tránh tự khóa SSH",
+        ],
+        Component: LessonUfwFirewall,
+    },
+    {
+        path: "/phan-6-6",
+        code: "6.6",
+        title: "Chia sẻ file qua mạng",
+        description:
+            "Học SCP, Rsync và Samba để copy file, đồng bộ thư mục và chia sẻ dữ liệu trong mạng LAN.",
+        bullets: [
+            "Chọn đúng giữa SCP, Rsync và Samba theo nhu cầu",
+            "Thiết lập backup, network share và mount CIFS cơ bản",
+        ],
+        Component: LessonFileSharing,
+    },
+    {
+        path: "/phan-7-1",
+        code: "7.1",
+        title: "Nano editor cho người mới",
+        description:
+            "Làm quen Nano để mở, chỉnh sửa, tìm kiếm và lưu file nhanh trong terminal với bộ phím tắt dễ nhớ.",
+        bullets: [
+            "Mở, sửa, lưu và thoát file bằng Nano",
+            "Dùng tìm kiếm, thay thế và các phím tắt cơ bản",
+        ],
+        Component: LessonNanoEditor,
+    },
+    {
+        path: "/phan-7-2",
+        code: "7.2",
+        title: "Vim editor mạnh mẽ",
+        description:
+            "Học các mode quan trọng của Vim, cách di chuyển, chỉnh sửa, lưu file và xây nền để dùng editor mạnh hơn về sau.",
+        bullets: [
+            "Hiểu Normal, Insert, Visual và Command mode",
+            "Thực hành di chuyển, sửa nội dung và lưu file trong Vim",
+        ],
+        Component: LessonVimEditor,
+    },
+    {
+        path: "/phan-7-3",
+        code: "7.3",
+        title: "Xử lý văn bản với sed, awk, cut, sort, uniq",
+        description:
+            "Thực hành pipeline xử lý text trong terminal để lọc, cắt cột, sắp xếp, đếm trùng lặp và biến đổi dữ liệu hàng loạt.",
+        bullets: [
+            "Kết hợp cut, sort, uniq và grep để lọc dữ liệu",
+            "Dùng sed, awk để thay thế, tách cột và xử lý text nâng cao",
+        ],
+        Component: LessonTextProcessing,
+    },
+    {
+        path: "/phan-7-4",
+        code: "7.4",
+        title: "So sánh file với diff và patch",
+        description:
+            "Học cách so sánh khác biệt giữa file, tạo patch và áp dụng patch để cập nhật nội dung an toàn hơn.",
+        bullets: [
+            "Dùng diff để xem thay đổi giữa hai file hoặc thư mục",
+            "Tạo và áp dụng patch trong workflow chỉnh sửa văn bản",
+        ],
+        Component: LessonDiffPatch,
     },
 ];
 
