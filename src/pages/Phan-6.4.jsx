@@ -31,7 +31,6 @@ import {
     ShieldAlert,
     ShieldCheck,
     TerminalSquare,
-    Tunnel,
     UserCheck,
     Users,
     Wifi,
@@ -133,7 +132,7 @@ export default function App() {
                     <SectionTitle
                         n="7"
                         color="purple"
-                        icon={<Tunnel size={22} />}
+                        icon={<Route size={22} />}
                         title="SSH tunneling — local forwarding và SOCKS proxy"
                     />
                     <TunnelGuide />
@@ -226,7 +225,7 @@ function Hero() {
         [TerminalSquare, "ssh", "Remote shell mã hóa"],
         [KeyRound, "SSH key", "Đăng nhập bằng key pair"],
         [FolderSync, "scp", "Copy file qua SSH"],
-        [Tunnel, "tunnel", "Port forwarding an toàn"],
+        [Route, "tunnel", "Port forwarding an toàn"],
     ];
     return (
         <section className="text-center space-y-5 py-8">

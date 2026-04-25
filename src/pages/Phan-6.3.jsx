@@ -13,9 +13,9 @@ import {
     FileCheck2,
     FileDown,
     FileJson,
+    FileText,
     Gauge,
     Globe2,
-    Header,
     Info,
     KeyRound,
     Layers,
@@ -607,7 +607,7 @@ $ curl -L -C - -o ubuntu.iso https://example.com/ubuntu.iso
                         text="curl không tự lưu file nếu bạn không dùng -O hoặc -o."
                     />
                     <MiniPoint
-                        icon={<Header size={18} />}
+                        icon={<FileText size={18} />}
                         tone="cyan"
                         title="-I"
                         text="Xem HTTP status/header, tốt khi debug redirect/cache/server."
