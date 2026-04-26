@@ -56,6 +56,13 @@ import LessonNanoEditor from "./pages/Phan-7.1.jsx";
 import LessonVimEditor from "./pages/Phan-7.2.jsx";
 import LessonTextProcessing from "./pages/Phan-7.3.jsx";
 import LessonDiffPatch from "./pages/Phan-7.4.jsx";
+import LessonBashIntro from "./pages/Phan-8.1.jsx";
+import LessonBashVariables from "./pages/Phan-8.2.jsx";
+import LessonBashConditions from "./pages/Phan-8.3.jsx";
+import LessonBashLoops from "./pages/Phan-8.4.jsx";
+import LessonBashFunctions from "./pages/Phan-8.5.jsx";
+import LessonBashArgsErrors from "./pages/Phan-8.6.jsx";
+import LessonCronJobs from "./pages/Phan-8.7.jsx";
 
 const lessons = [
     {
@@ -513,6 +520,90 @@ const lessons = [
             "Tạo và áp dụng patch trong workflow chỉnh sửa văn bản",
         ],
         Component: LessonDiffPatch,
+    },
+    {
+        path: "/phan-8-1",
+        code: "8.1",
+        title: "Bash Script là gì? Tạo script đầu tiên",
+        description:
+            "Làm quen Bash script, cấu trúc file script, shebang, quyền thực thi và cách chạy script đầu tiên.",
+        bullets: [
+            "Hiểu shebang, chmod +x và cách thực thi script",
+            "Biết khi nào nên chuyển từ lệnh tay sang script tự động hóa",
+        ],
+        Component: LessonBashIntro,
+    },
+    {
+        path: "/phan-8-2",
+        code: "8.2",
+        title: "Biến, kiểu dữ liệu và nhập liệu người dùng",
+        description:
+            "Học cách khai báo biến, làm việc với dữ liệu cơ bản và nhận input từ người dùng trong Bash.",
+        bullets: [
+            "Dùng biến, read và mở rộng giá trị trong script",
+            "Kiểm tra input và tổ chức dữ liệu đầu vào an toàn hơn",
+        ],
+        Component: LessonBashVariables,
+    },
+    {
+        path: "/phan-8-3",
+        code: "8.3",
+        title: "Câu lệnh điều kiện if, else, case",
+        description:
+            "Cho script khả năng ra quyết định bằng so sánh điều kiện, rẽ nhánh logic và xử lý nhiều trường hợp.",
+        bullets: [
+            "Dùng if, elif, else để kiểm tra điều kiện",
+            "Dùng case cho menu lệnh và nhánh xử lý rõ ràng hơn",
+        ],
+        Component: LessonBashConditions,
+    },
+    {
+        path: "/phan-8-4",
+        code: "8.4",
+        title: "Vòng lặp Bash: for, while, until",
+        description:
+            "Tự động hóa tác vụ lặp lại với các kiểu vòng lặp phổ biến và cách kiểm soát luồng chạy trong Bash.",
+        bullets: [
+            "Dùng for, while, until đúng ngữ cảnh",
+            "Lặp qua danh sách, file và các tác vụ hệ thống hàng loạt",
+        ],
+        Component: LessonBashLoops,
+    },
+    {
+        path: "/phan-8-5",
+        code: "8.5",
+        title: "Hàm function trong Bash",
+        description:
+            "Tách script thành các hàm để tái sử dụng, dễ bảo trì hơn và tổ chức logic rõ ràng hơn.",
+        bullets: [
+            "Định nghĩa và gọi function trong Bash",
+            "Chia nhỏ script để tái sử dụng và debug thuận tiện hơn",
+        ],
+        Component: LessonBashFunctions,
+    },
+    {
+        path: "/phan-8-6",
+        code: "8.6",
+        title: "Xử lý tham số và lỗi trong script",
+        description:
+            "Làm việc với tham số dòng lệnh, mã thoát và các kỹ thuật xử lý lỗi để script chạy ổn định hơn.",
+        bullets: [
+            "Đọc tham số với $1, $@ và kiểm tra input đầu vào",
+            "Dùng exit code, validation và thông báo lỗi rõ ràng",
+        ],
+        Component: LessonBashArgsErrors,
+    },
+    {
+        path: "/phan-8-7",
+        code: "8.7",
+        title: "Cron job: Tự động hóa theo lịch",
+        description:
+            "Học cách lập lịch chạy script định kỳ bằng cron để tự động hóa backup, dọn dẹp và tác vụ hệ thống.",
+        bullets: [
+            "Viết biểu thức cron và quản lý crontab",
+            "Lập lịch script an toàn, có log và dễ kiểm tra lỗi",
+        ],
+        Component: LessonCronJobs,
     },
 ];
 
