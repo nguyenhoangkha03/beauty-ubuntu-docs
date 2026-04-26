@@ -63,6 +63,11 @@ import LessonBashLoops from "./pages/Phan-8.4.jsx";
 import LessonBashFunctions from "./pages/Phan-8.5.jsx";
 import LessonBashArgsErrors from "./pages/Phan-8.6.jsx";
 import LessonCronJobs from "./pages/Phan-8.7.jsx";
+import LessonDiskPartitioning from "./pages/Phan-9.1.jsx";
+import LessonDiskMounting from "./pages/Phan-9.2.jsx";
+import LessonLvmBasics from "./pages/Phan-9.3.jsx";
+import LessonCompressionTools from "./pages/Phan-9.4.jsx";
+import LessonDiskRepair from "./pages/Phan-9.5.jsx";
 
 const lessons = [
     {
@@ -604,6 +609,66 @@ const lessons = [
             "Lập lịch script an toàn, có log và dễ kiểm tra lỗi",
         ],
         Component: LessonCronJobs,
+    },
+    {
+        path: "/phan-9-1",
+        code: "9.1",
+        title: "Phân vùng ổ đĩa: fdisk, parted, lsblk",
+        description:
+            "Làm quen cách xem cấu trúc ổ đĩa, tạo phân vùng mới và hiểu bố cục lưu trữ trên Linux.",
+        bullets: [
+            "Dùng lsblk để đọc nhanh thiết bị, partition và mountpoint",
+            "Phân biệt vai trò của fdisk và parted khi chia ổ đĩa",
+        ],
+        Component: LessonDiskPartitioning,
+    },
+    {
+        path: "/phan-9-2",
+        code: "9.2",
+        title: "Format và mount ổ đĩa",
+        description:
+            "Học cách tạo filesystem, mount hoặc umount thiết bị và cấu hình tự mount với fstab.",
+        bullets: [
+            "Dùng mkfs, mount và umount đúng quy trình",
+            "Cấu hình fstab an toàn để ổ đĩa tự mount khi khởi động",
+        ],
+        Component: LessonDiskMounting,
+    },
+    {
+        path: "/phan-9-3",
+        code: "9.3",
+        title: "LVM cơ bản",
+        description:
+            "Hiểu Logical Volume Manager để quản lý volume linh hoạt hơn so với phân vùng tĩnh truyền thống.",
+        bullets: [
+            "Nắm PV, VG, LV và quy trình tạo volume cơ bản",
+            "Biết khi nào nên dùng LVM để mở rộng hoặc tổ chức lưu trữ",
+        ],
+        Component: LessonLvmBasics,
+    },
+    {
+        path: "/phan-9-4",
+        code: "9.4",
+        title: "Nén và giải nén file",
+        description:
+            "Làm chủ các công cụ nén phổ biến trên Linux để đóng gói, truyền tải và lưu trữ dữ liệu hiệu quả hơn.",
+        bullets: [
+            "Dùng tar, gzip, bzip2, xz và zip đúng mục đích",
+            "Biết cách nén thư mục, giải nén và kiểm tra nội dung archive",
+        ],
+        Component: LessonCompressionTools,
+    },
+    {
+        path: "/phan-9-5",
+        code: "9.5",
+        title: "Kiểm tra và sửa lỗi ổ đĩa",
+        description:
+            "Theo dõi sức khỏe ổ đĩa và xử lý lỗi filesystem với các công cụ chẩn đoán và sửa lỗi phổ biến.",
+        bullets: [
+            "Dùng smartctl để xem tình trạng phần cứng lưu trữ",
+            "Dùng fsck, badblocks và các bước kiểm tra ổ đĩa an toàn",
+        ],
+        Component: LessonDiskRepair,
     },
 ];
 
