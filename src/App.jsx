@@ -68,6 +68,16 @@ import LessonDiskMounting from "./pages/Phan-9.2.jsx";
 import LessonLvmBasics from "./pages/Phan-9.3.jsx";
 import LessonCompressionTools from "./pages/Phan-9.4.jsx";
 import LessonDiskRepair from "./pages/Phan-9.5.jsx";
+import LessonSecurityUpdates from "./pages/Phan-10.1.jsx";
+import LessonSshKeys from "./pages/Phan-10.2.jsx";
+import LessonUfwFail2Ban from "./pages/Phan-10.3.jsx";
+import LessonOpenPorts from "./pages/Phan-10.4.jsx";
+import LessonAppArmor from "./pages/Phan-10.5.jsx";
+import LessonRuntimeSetup from "./pages/Phan-11.1.jsx";
+import LessonDockerCompose from "./pages/Phan-11.2.jsx";
+import LessonGitBasics from "./pages/Phan-11.3.jsx";
+import LessonVirtualEnvironments from "./pages/Phan-11.4.jsx";
+import LessonVsCodeTooling from "./pages/Phan-11.5.jsx";
 
 const lessons = [
     {
@@ -669,6 +679,126 @@ const lessons = [
             "Dùng fsck, badblocks và các bước kiểm tra ổ đĩa an toàn",
         ],
         Component: LessonDiskRepair,
+    },
+    {
+        path: "/phan-10-1",
+        code: "10.1",
+        title: "Cập nhật hệ thống và vá lỗi bảo mật",
+        description:
+            "Hiểu quy trình cập nhật Ubuntu an toàn với apt, bản vá bảo mật, reboot khi cần và xử lý lỗi APT phổ biến.",
+        bullets: [
+            "Phân biệt apt update, upgrade và full-upgrade",
+            "Kiểm tra bản vá, reboot requirement và lỗi APT thường gặp",
+        ],
+        Component: LessonSecurityUpdates,
+    },
+    {
+        path: "/phan-10-2",
+        code: "10.2",
+        title: "Quản lý khóa SSH",
+        description:
+            "Làm chủ SSH key pair, authorized_keys, ssh-copy-id và các quyền file bắt buộc để đăng nhập an toàn hơn mật khẩu.",
+        bullets: [
+            "Tạo và triển khai SSH key đúng cách",
+            "Cấu hình ~/.ssh/config và sửa lỗi permission phổ biến",
+        ],
+        Component: LessonSshKeys,
+    },
+    {
+        path: "/phan-10-3",
+        code: "10.3",
+        title: "Cấu hình UFW và Fail2Ban",
+        description:
+            "Thiết lập firewall và chống brute-force cho Ubuntu Server bằng UFW và Fail2Ban theo cách an toàn.",
+        bullets: [
+            "Mở đúng port, bật UFW không khóa SSH",
+            "Cài Fail2Ban để tự động ban IP brute-force",
+        ],
+        Component: LessonUfwFail2Ban,
+    },
+    {
+        path: "/phan-10-4",
+        code: "10.4",
+        title: "Kiểm tra cổng mở và dịch vụ lắng nghe",
+        description:
+            "Kiểm tra bề mặt tấn công của server bằng ss, lsof, systemctl, ufw và nmap để biết dịch vụ nào đang public.",
+        bullets: [
+            "Phân biệt 127.0.0.1 với 0.0.0.0 khi service listen",
+            "Dùng ss, lsof và nmap để rà soát port đang mở",
+        ],
+        Component: LessonOpenPorts,
+    },
+    {
+        path: "/phan-10-5",
+        code: "10.5",
+        title: "AppArmor cơ bản",
+        description:
+            "Làm quen AppArmor, profile, mode enforce hoặc complain và cách đọc log để debug ứng dụng bị chặn quyền.",
+        bullets: [
+            "Phân biệt AppArmor với firewall mạng như UFW",
+            "Đọc DENIED log và chỉnh profile an toàn hơn",
+        ],
+        Component: LessonAppArmor,
+    },
+    {
+        path: "/phan-11-1",
+        code: "11.1",
+        title: "Cài đặt và quản lý Python, Node.js, Java",
+        description:
+            "Thiết lập các runtime lập trình phổ biến trên Ubuntu và chọn đúng công cụ quản lý version cho từng hệ sinh thái.",
+        bullets: [
+            "Cài Python, Node.js, Java theo cách phù hợp",
+            "Hiểu venv, nvm và update-alternatives để quản lý môi trường",
+        ],
+        Component: LessonRuntimeSetup,
+    },
+    {
+        path: "/phan-11-2",
+        code: "11.2",
+        title: "Cài đặt Docker và Docker Compose",
+        description:
+            "Làm quen container trên Ubuntu, cài Docker Engine từ nguồn chính thức và chạy các container đầu tiên an toàn.",
+        bullets: [
+            "Cài Docker Engine và kiểm tra docker compose",
+            "Chạy container mẫu và hiểu rủi ro của group docker",
+        ],
+        Component: LessonDockerCompose,
+    },
+    {
+        path: "/phan-11-3",
+        code: "11.3",
+        title: "Cài đặt Git và cấu hình cơ bản",
+        description:
+            "Thiết lập Git trên Ubuntu, cấu hình danh tính, khởi tạo repository và làm quen các lệnh commit nền tảng.",
+        bullets: [
+            "Cấu hình user.name, user.email và git init",
+            "Dùng git add, commit, log và tránh commit nhầm dữ liệu nhạy cảm",
+        ],
+        Component: LessonGitBasics,
+    },
+    {
+        path: "/phan-11-4",
+        code: "11.4",
+        title: "Quản lý môi trường ảo",
+        description:
+            "Tách môi trường theo từng project bằng venv, virtualenv, nvm và pyenv để tránh xung đột version và dependency.",
+        bullets: [
+            "Dùng venv hoặc virtualenv cho Python project",
+            "Quản lý nhiều version bằng nvm, pyenv và khi cần kết hợp chúng",
+        ],
+        Component: LessonVirtualEnvironments,
+    },
+    {
+        path: "/phan-11-5",
+        code: "11.5",
+        title: "Cài đặt VS Code và công cụ lập trình",
+        description:
+            "Hoàn thiện workstation phát triển trên Ubuntu với VS Code, extension cần thiết và các công cụ làm việc hằng ngày.",
+        bullets: [
+            "Cài VS Code bằng .deb, snap hoặc APT repository",
+            "Thêm extension và tooling cho Python, Node.js, Java, Docker, Git",
+        ],
+        Component: LessonVsCodeTooling,
     },
 ];
 
