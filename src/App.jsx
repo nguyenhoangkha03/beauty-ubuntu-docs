@@ -78,6 +78,11 @@ import LessonDockerCompose from "./pages/Phan-11.2.jsx";
 import LessonGitBasics from "./pages/Phan-11.3.jsx";
 import LessonVirtualEnvironments from "./pages/Phan-11.4.jsx";
 import LessonVsCodeTooling from "./pages/Phan-11.5.jsx";
+import LessonDesktopServer from "./pages/Phan-12.1.jsx";
+import LessonWebServers from "./pages/Phan-12.2.jsx";
+import LessonDatabases from "./pages/Phan-12.3.jsx";
+import LessonDomainSsl from "./pages/Phan-12.4.jsx";
+import LessonServerMonitoring from "./pages/Phan-12.5.jsx";
 
 const lessons = [
     {
@@ -799,6 +804,66 @@ const lessons = [
             "Thêm extension và tooling cho Python, Node.js, Java, Docker, Git",
         ],
         Component: LessonVsCodeTooling,
+    },
+    {
+        path: "/phan-12-1",
+        code: "12.1",
+        title: "Khác biệt giữa Ubuntu Desktop và Server",
+        description:
+            "Phân biệt Ubuntu Desktop và Ubuntu Server, hiểu khi nào dùng GUI, khi nào quản trị bằng terminal và SSH.",
+        bullets: [
+            "So sánh mục đích sử dụng, tài nguyên và cách quản trị",
+            "Kiểm tra GUI, gdm3, SSH và các dấu hiệu nhận biết server",
+        ],
+        Component: LessonDesktopServer,
+    },
+    {
+        path: "/phan-12-2",
+        code: "12.2",
+        title: "Cài đặt web server: Apache và Nginx",
+        description:
+            "Triển khai web server đầu tiên trên Ubuntu với Apache hoặc Nginx, virtual host và kiểm tra hoạt động HTTP.",
+        bullets: [
+            "Cài Apache hoặc Nginx và hiểu vai trò của web server",
+            "Cấu hình site, kiểm tra port, service và response HTTP",
+        ],
+        Component: LessonWebServers,
+    },
+    {
+        path: "/phan-12-3",
+        code: "12.3",
+        title: "Cài đặt database: MySQL và PostgreSQL",
+        description:
+            "Làm việc với database server trên Ubuntu, từ cài đặt service đến tạo database, user và kết nối ứng dụng.",
+        bullets: [
+            "Cài MySQL/PostgreSQL, kiểm tra port 3306 và 5432",
+            "Tạo database, user, quyền truy cập và xử lý lỗi kết nối cơ bản",
+        ],
+        Component: LessonDatabases,
+    },
+    {
+        path: "/phan-12-4",
+        code: "12.4",
+        title: "Cấu hình tên miền và SSL với Let's Encrypt",
+        description:
+            "Trỏ domain về server, cấu hình HTTPS và cấp chứng chỉ SSL miễn phí bằng Certbot cho Nginx hoặc Apache.",
+        bullets: [
+            "Hiểu DNS, HTTP/HTTPS, Certbot và quy trình cấp SSL",
+            "Thiết lập domain, reverse proxy và gia hạn chứng chỉ an toàn",
+        ],
+        Component: LessonDomainSsl,
+    },
+    {
+        path: "/phan-12-5",
+        code: "12.5",
+        title: "Giám sát server cơ bản",
+        description:
+            "Theo dõi sức khỏe server bằng CPU, RAM, disk, service, log và các bước debug tình huống vận hành phổ biến.",
+        bullets: [
+            "Dùng top, free, df, systemctl, journalctl và ss để kiểm tra",
+            "Xử lý các ca chậm, 502, disk đầy và service lỗi theo quy trình",
+        ],
+        Component: LessonServerMonitoring,
     },
 ];
 
